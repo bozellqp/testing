@@ -25,6 +25,12 @@ def port_check(host, port):
     return subprocess.run(cmd, shell=True, capture_output=True, text=True).stderr
 
 
+def dns_lookup(host, record_type="A"):
+    """Resolve a DNS record for a host using dig."""
+    cmd = f"dig {record_type} {host} +short"
+    return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout
+
+
 if __name__ == "__main__":
     import sys
     target = sys.argv[1] if len(sys.argv) > 1 else "localhost"
